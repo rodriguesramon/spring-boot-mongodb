@@ -50,7 +50,6 @@ public class UserResource {
 		User user = userService.fromDTO(userDTO);
 		user.setId(id);
 		user = userService.update(user);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.noContent().build();		
 	}
 	

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.ramoncosta.mongodb.domain.Post;
 import com.ramoncosta.mongodb.domain.User;
 import com.ramoncosta.mongodb.dto.AuthorDTO;
+import com.ramoncosta.mongodb.dto.CommentDTO;
 import com.ramoncosta.mongodb.repository.PostRepository;
 import com.ramoncosta.mongodb.repository.UserRepository;
 
@@ -41,10 +42,19 @@ public class Instantiation implements CommandLineRunner{
 		Post post1 = new Post(null, simpleDate.parse("22/02/2020"), "Partiu Viagem", "Vou pra Manaus, Tchau!", new AuthorDTO(maria));
 		Post post2 = new Post(null, simpleDate.parse("22/02/2020"), "Partiu Viagem", "Vou pra Manaus, Tchau!", new AuthorDTO(maria));
 		
+		CommentDTO c1 = new CommentDTO("Falow, vai pq quer!", simpleDate.parse("25/02/2020"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Tamo junto loko!", simpleDate.parse("27/02/2020"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Vainnnnnnn!", simpleDate.parse("27/02/2020"), new AuthorDTO(maria));
+		
+		post1.getComments().addAll(Arrays.asList(c1,c2));
+		post2.getComments().addAll(Arrays.asList(c3));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 		maria.getPosts().addAll(Arrays.asList(post1, post2));
 		userRepository.save(maria);
+		
+		
 		
 	}
 

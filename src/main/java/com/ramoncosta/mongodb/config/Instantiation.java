@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.ramoncosta.mongodb.domain.Post;
 import com.ramoncosta.mongodb.domain.User;
+import com.ramoncosta.mongodb.dto.AuthorDTO;
 import com.ramoncosta.mongodb.repository.PostRepository;
 import com.ramoncosta.mongodb.repository.UserRepository;
 
@@ -35,10 +36,11 @@ public class Instantiation implements CommandLineRunner{
 		User alex= new User(null, "Alex Green", "alex@gmail.com");
 		User bob= new User(null, "Bob Grey", "bob@gmail.com");
 		
-		Post post1 = new Post(null, simpleDate.parse("22/02/2020"), "Partiu Viagem", "Vou pra Manaus, Tchau!", maria);
-		Post post2 = new Post(null, simpleDate.parse("22/02/2020"), "Partiu Viagem", "Vou pra Manaus, Tchau!", maria);
-		
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		
+		Post post1 = new Post(null, simpleDate.parse("22/02/2020"), "Partiu Viagem", "Vou pra Manaus, Tchau!", new AuthorDTO(maria));
+		Post post2 = new Post(null, simpleDate.parse("22/02/2020"), "Partiu Viagem", "Vou pra Manaus, Tchau!", new AuthorDTO(maria));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 	}
